@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+{# https://stackoverflow.com/questions/7680917/how-do-i-get-the-entity-that-represents-the-current-user-in-symfony2 #}
+{% block body %}
+
+    <h1>{% if app.user.Firstname %}{{ app.user.Firstname }}</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nom du Client</th>
+        <th>Roles</th>
+        <th>Mot de passe</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            {% set AdminRole = "ROLE_ADMIN" %}
+            <td>{% if AdminRole in user.roles  %}Compte Admin {% else %} Compte Client {% endif %}{# {{ user.roles ? user.roles|json_encode : '' }} #}</td>
+            <td><a href="{{ path('app_user_edit', {'id': user.id}) }}">Changer de Mot de Passe</a></td>
+            <td>
+                <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                <a href="{{ path('app_user_edit', {'id': user.id}) }}" >edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+    <a href="{{ path('app_user_new') }}">Create new Users</a>
+    <a href="{{ path('app_user_index') }}">back to site</a>
+    {% endif %}
+
+    {% endblock %}
+{#
+{% block body %}
+    <h1>User index</h1>
+    <h2>Logged User : {% if app.user.username is defined and app.user.username is not null %}{{ app.user.username }}{% endif %}</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Password</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : ''  }}</td>
+                <td>{{ user.password }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_user_new') }}">Create new Users</a>
+
+#}
+
+

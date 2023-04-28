@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+{% if app.debug %}
+    <p>{{ app.current_route }}</p>
+    {% for parametres in app.current_route_parameters %}
+        <p>{{ parameters }}</p>
+    {% endfor %}
+
+{% endif %}
+
+{% endblock %}

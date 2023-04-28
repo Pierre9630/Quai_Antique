@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+    <h2>Logged User : {% if app.user.Firstname is defined and app.user.Firstname is not null %}{{ app.user.Firstname }}{% endif %}</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Password</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                {% set AdminRole = "ROLE_ADMIN" %}
+                <td>{% if AdminRole in user.roles  %}Compte Admin {% else %} Compte Client {% endif %}</td>
+                <td>{{ user.password }}</td>
+                <td>
+                    <a href="{{ path('app_admin_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_admin_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_admin_new') }}">Create new Users</a>
+    <h1>Admins</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Password</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for admin in admins %}
+            <tr>
+                <td>{{ admin.id }}</td>
+                <td>{{ admin.email }}</td>
+                {% set AdminRole = "ROLE_ADMIN" %}
+                <td>{% if AdminRole in admin.roles  %}Compte Admin {% else %} Compte Client {% endif %}</td>
+                <td>{{ admin.password }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': admin.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': admin.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Products Table</h1>
+    <table class="table">
+        <tbody>
+        {% for menu in menus %}
+        <tr>
+            <th>Id</th>
+            <td>{{ menu.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ menu.title }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ menu.description}}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{ menu.price }}</td>
+        </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
