@@ -11,8 +11,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdminFixtures extends Fixture
 {
     const Emails = [
-        'Ptuner',
-        'PierreAdmin',
+        'Ptuner@Ptuner.com',
+        'PierreAdmin@admin.com',
     ];
     const Pass = [
         'test44',
