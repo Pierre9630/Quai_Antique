@@ -8,21 +8,21 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Email</th>
-            <th>Roles</th>
-            <th>Password</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Type de Compte</th>
             <th>actions</th>
         </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
                 {% set AdminRole = "ROLE_ADMIN" %}
                 <td>{% if AdminRole in user.roles  %}Compte Admin {% else %} Compte Client {% endif %}</td>
-                <td>{{ user.password }}</td>
                 <td>
                     <a href="{{ path('app_admin_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('app_admin_edit', {'id': user.id}) }}">edit</a>
@@ -35,6 +35,9 @@
         {% endfor %}
         </tbody>
     </table>
+    {%  if knp_pagination_render(users) %}
+    <label>Changer de Page : </label>{{ knp_pagination_render(users)}}<br>
+    {% endif %}
     <a href="{{ path('app_admin_new') }}">Create new Users</a>
     <h1>Admins</h1>
     <table class="table">

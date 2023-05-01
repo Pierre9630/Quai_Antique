@@ -39,8 +39,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
+    /**
+     * @Assert\Regex("^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$")
+     */
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'user_res', targetEntity: Reservation::class)]
