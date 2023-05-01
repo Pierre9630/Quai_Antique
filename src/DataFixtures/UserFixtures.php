@@ -6,9 +6,10 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements OrderedFixtureInterface
 {
     const Emails = [
         'John@thebest.us',
@@ -64,6 +65,7 @@ class UserFixtures extends Fixture
             $user->setFirstname(self::FirstNames[$Index]);
             $user->setLastname(self::LastNames[$Index]);
             $user->setPhone(self::PhoneNumbers[$Index]);
+            //$this->addReference('user-reference', $user);
             /*if($Index == 3){
                 dd($UserName.' '. self::Pass[$Index]);
             }*/
@@ -88,6 +90,12 @@ class UserFixtures extends Fixture
         $manager->persist($user);
         $manager->flush();
         */
+    }
+
+    public function getOrder()
+    {
+        // TODO: Implement getOrder() method.
+        return 10;
     }
 }
 /*

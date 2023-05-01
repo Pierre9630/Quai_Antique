@@ -44,7 +44,7 @@
             <ul class="navbar-nav justify-content-end">
                 {% if app.user %}
                 <li class="nav-item">
-                    <a class="title">{{ app.user.lastname }}</a>
+                    <a class="title" href="{{ path("app_user_index") }}">{{ app.user.lastname }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path("app_logout") }}">Déconnexion</a>

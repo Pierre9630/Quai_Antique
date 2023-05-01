@@ -30,7 +30,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $userRepository->paginateUsers(),
             $request->query->get('page',1),
-            25
+            25 //number of users per page
         );
         return $this->render('admin/index.html.twig', [
             'users' => $pagination,
