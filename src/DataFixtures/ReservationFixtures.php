@@ -10,7 +10,8 @@ use Symfony\Component\Validator\Constraints\Date;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-//https://symfonycasts.com/screencast/symfony2-ep3/sharing-data-fixtures
+/*https://symfonycasts.com/screencast/symfony2-ep3/sharing-data-fixtures
+https://stackoverflow.com/questions/67157254/inserting-the-current-date-doctrine*/
 class ReservationFixtures extends Fixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager): void

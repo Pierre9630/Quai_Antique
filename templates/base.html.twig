@@ -136,9 +136,27 @@
                     <h5 class="text-uppercase">Footer text</h5>
 
                     <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-                        molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
-                        aliquam voluptatem veniam, est atque cumque eum delectus sint!
+
+                        {% set trans_day_hash = {
+                            "monday": "Lundi",
+                            "tuesday": "Mardi",
+                            "wednesday": "Mercredi",
+                            "thursday": "Jeudi",
+                            "friday": "Vendredi",
+                            "saturday": "Samedi",
+                            "sunday": "Dimanche"
+                        }
+                        %}
+                    <h1>Réserver une table</h1>
+                    <p>{% for day,hours in openhours %}
+                    <h3>{{ trans_day_hash[day] }}</h3>
+                    {% if hours != '' %}
+                        {{ hours }}
+                    {% else %}
+                        fermé
+                    {% endif %}
+                    {% endfor %}
+
                     </p>
                 </div>
                 <!--Grid column-->

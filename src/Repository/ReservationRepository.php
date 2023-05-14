@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -37,6 +38,19 @@ class ReservationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function selectDate(EntityManager $entityManager, string $date){
+
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $date . ' 00:00:00'); // crée un objet DateTime à partir de la chaîne de caractères
+        $startOfDay = $date->format('Y-m-d H:i:s'); // début de la journée du xx/xx/xxxx
+        $endOfDay = $date->modify('+1 day')->format('Y-m-d H:i:s'); // fin de la journée du xx/xx/xxx
+
+        $queryBuilder = $entityManager->getRepository(Reservation::class)->createQueryBuilder('r'); // création de la requête
+        $queryBuilder->where('r.date_res >= :startOfDay AND r.date_res < :endOfDay')
+            ->setParameter('startOfDay', $startOfDay)
+            ->setParameter('endOfDay', $endOfDay);
+        return $queryBuilder->getQuery()->getResult();
     }
 
 //    /**

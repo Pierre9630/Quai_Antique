@@ -23,6 +23,9 @@ class OpeningHours
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $close_time = null;
 
+    #[ORM\Column(length: 30)]
+    private ?string $timeofday = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class OpeningHours
     public function setCloseTime(\DateTimeInterface $close_time): self
     {
         $this->close_time = $close_time;
+
+        return $this;
+    }
+
+    public function getTimeofday(): ?string
+    {
+        return $this->timeofday;
+    }
+
+    public function setTimeofday(string $timeofday): self
+    {
+        $this->timeofday = $timeofday;
 
         return $this;
     }
