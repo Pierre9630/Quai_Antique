@@ -136,7 +136,8 @@
                     <h5 class="text-uppercase">Footer text</h5>
 
                     <p>
-
+                        {% set oh = OpenHoursMethod() %}
+                        {% dump(oh) %}
                         {% set trans_day_hash = {
                             "monday": "Lundi",
                             "tuesday": "Mardi",
@@ -148,7 +149,7 @@
                         }
                         %}
                     <h1>Réserver une table</h1>
-                    <p>{% for day,hours in openhours %}
+                    <p>{% for day,hours in oh %}
                     <h3>{{ trans_day_hash[day] }}</h3>
                     {% if hours != '' %}
                         {{ hours }}

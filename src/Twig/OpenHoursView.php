@@ -55,7 +55,7 @@ class OpenHoursView extends AbstractExtension
                 $saturday_evening->getOpenTime()->format('H:i') . '-' . $saturday_evening->getCloseTime()->format('H:i')],
             'sunday' => [$sunday_morning->getOpenTime()->format('H:i') .'-' . $sunday_morning->getCloseTime()->format('H:i')],
         ]);
-
+        //dd($openingHours->forWeek());
         return $openingHours->forWeek(); //$openingHours->asStructuredData('H:iP', '+01:00'),
     }
 }
